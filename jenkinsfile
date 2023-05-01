@@ -17,5 +17,20 @@ pipeline {
                 }
             }
         }
+        // Install SSH Agent Plugin and SSH Credentials Plugin in folder Manage Jenkins > Manage Plugins.
+        // Create SSH key pair on Jenkins and add public key to authorized_keys of user on server.
+        // Use SSH Agent Plugin và SSH Credentials Plugin to deploy vps or ec2 aws.
+        // my-ssh-credential is ID's Credential SSH was created before.
+        // SSH_USER and SERVER_IP is env od server info.
+        stage('Deploy') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'my-ssh-credential', keyFileVariable: 'SSH_PRIVATE_KEY', passphraseVariable: '', usernameVariable: 'SSH_USER')]) {
+                    sshagent(['my-ssh-credential']) {
+                        sh "ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SERVER_IP} 'docker pull myusername/myrepository:${env.GIT_COMMIT}'"
+                        sh "ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SERVER_IP} 'docker run -d -p 8080:80 --name mycontainer myusername/myrepository:${env.GIT_COMMIT}'"
+                    }
+                }
+            }
+        }
     }
-} 
+}

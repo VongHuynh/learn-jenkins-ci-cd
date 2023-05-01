@@ -8,11 +8,11 @@ services:
     environment:
       REGISTRY_AUTH: htpasswd
       REGISTRY_AUTH_HTPASSWD_REALM: Registry
-      REGISTRY_AUTH_HTPASSWD_PATH: /root/docker-registry/auth/registry.password
-      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+      REGISTRY_AUTH_HTPASSWD_PATH: ./auth/registry.password
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /registry-data
     volumes:
       - ./auth:/auth
-      - ./data:/data
+      - ./registry-data:/data
     restart: always
 
     # set up authentication
