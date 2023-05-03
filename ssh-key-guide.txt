@@ -1,0 +1,15 @@
+GUIDE CRATE SSH KET TO REMOTE SV WITH SSH KEY
+
+
+ssh-keygen
+[Enter]
+[Enter]
+[Enter]
+cd /.ssh
+
+[ nano authorized_keys,
+Paste in your whole public key and save the file by pressing [CTRL+O]. To exit the editor use [CTRL+X] ]
+
+OR
+
+    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
