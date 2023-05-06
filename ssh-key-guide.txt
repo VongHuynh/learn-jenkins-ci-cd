@@ -1,7 +1,7 @@
 GUIDE CRATE SSH KET TO REMOTE SV WITH SSH KEY
 
 
-ssh-keygen
+ssh-keygen -t rsa
 [Enter]
 [Enter]
 [Enter]
@@ -13,3 +13,9 @@ Paste in your whole public key and save the file by pressing [CTRL+O]. To exit t
 OR
 
     cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
+
+chmode 400 id_rsa
+chmode 600 authorized_keys
+nano /etc/ssh/sshd_config => edit: PasswordAuthentication yes -> PasswordAuthentication no
+
+That's all, Then Copy id_rsa is SSH_KEY
