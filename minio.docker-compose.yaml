@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  minio:
+    image: minio/minio:RELEASE.2023-03-24T21-41-23Z
+    container_name: minio
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      # MINIO_ACCESS_KEY: minio_access_key
+      # MINIO_SECRET_KEY: minio_secret_key
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: <your-password>
+      MINIO_ADDRESS: ':9000'
+      MINIO_CONSOLE_ADDRESS: ':9001'
+    command: server --address ":9000" --console-address ":9001" /data
+    volumes:
+      - /mnt/hhwt-service-extend-volume/minio-data:/data
+      # deploy matomo with tsl, wss, nginx document: https://min.io/docs/minio/linux/integrations/setup-nginx-proxy-with-minio.html
