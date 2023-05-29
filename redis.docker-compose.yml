@@ -4,7 +4,7 @@ services:
 
   redis:
     image: "redis:6.2.12-alpine"
-    command: redis-server --requirepass ${REDIS_PASS:-xkayYkgft6PKGYFXb} --maxmemory 3gb --maxmemory-policy allkeys-lru
+    command: redis-server --requirepass ${REDIS_PASS:-xkayYkgft6PKGYFXb} --maxmemory 3gb --maxmemory-policy allkeys-lru --timeout 120
     ports:
      - "6379:6379"
     volumes:
